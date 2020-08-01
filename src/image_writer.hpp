@@ -15,6 +15,8 @@ public:
     ImageWriter &operator<<(const char chr);
     ImageWriter &operator<<(const int val);
 
+    ImageWriter &write(const int r, const int g, const int b);
+
 private:
     std::ofstream _imageStream;
 };

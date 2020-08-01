@@ -28,6 +28,12 @@ ImageWriter &ImageWriter::operator<<(const int val)
     return *this;
 }
 
+ImageWriter &ImageWriter::write(const int r, const int g, const int b)
+{
+    _imageStream << r << ' ' << g << ' ' << b << std::endl;
+    return *this;
+}
+
 ImageWriter::~ImageWriter()
 {
     _imageStream.close();
