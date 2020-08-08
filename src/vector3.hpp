@@ -19,10 +19,7 @@ public:
     Vector3 &operator*=(const double t);
     Vector3 &operator/=(const double t);
 
-    inline double length() const;
-    inline double dot(const Vector3 &u, const Vector3 &v);
-    inline Vector3 cross(const Vector3 &u, const Vector3 &v);
-    inline Vector3 unit(const Vector3 &v);
+    double length() const;
 
     float r();
     float g();
@@ -56,6 +53,21 @@ inline Vector3 operator*(const Vector3 &v, double t)
 inline Vector3 operator/(const Vector3 &v, double t)
 {
     return (1 / t) * v;
+}
+
+inline double dot(const Vector3 &u, const Vector3 &v)
+{
+    return (u.x * v.x) + (u.y * v.y) + (u.z * v.z);
+}
+inline Vector3 cross(const Vector3 &u, const Vector3 &v)
+{
+    return Vector3(u.y * v.z - u.z * v.y,
+                   u.z * v.x - u.x * v.z,
+                   u.x * v.y - u.y * v.x);
+}
+inline Vector3 unit_vector(const Vector3 &v)
+{
+    return v / v.length();
 }
 
 #endif

@@ -27,23 +27,9 @@ Vector3 &Vector3::operator/=(const double t)
     return *this *= 1 / t;
 }
 
-inline double Vector3::length() const
+double Vector3::length() const
 {
     return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
-}
-inline double dot(const Vector3 &u, const Vector3 &v)
-{
-    return (u.x * v.x) + (u.y * v.y) + (u.z * v.z);
-}
-inline Vector3 cross(const Vector3 &u, const Vector3 &v)
-{
-    return Vector3(u.y * v.z - u.z * v.y,
-                   u.z * v.x - u.x * v.z,
-                   u.x * v.y - u.y * v.x);
-}
-inline Vector3 unit(const Vector3 &v)
-{
-    return v / v.length();
 }
 
 float Vector3::r()
