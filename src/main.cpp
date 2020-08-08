@@ -1,20 +1,30 @@
+#include "image.hpp"
 #include "image_writer.hpp"
 #include "vector3.hpp"
+#include "ray.hpp"
+
+Vector3 ray_color(const Ray &r)
+{
+    Vector3 unit_direction = unit_vector(r.direction());
+    auto t = 0.5 * (unit_direction.y + 1.0);
+    return (1.0 - t) * Vector3(1.0, 1.0, 1.0) + t * Vector3(1.0, 0.2, 0.3);
+}
 
 int main()
 {
-    const int image_width = 256;
-    const int image_height = 256;
+    Image img(428);
+    ImageWriter iw(img);
 
-    ImageWriter iw(image_width, image_height);
-
-    for (int j = image_height - 1; j >= 0; --j)
+    for (int j = img.get_image_height() - 1; j >= 0; --j)
     {
-        for (int i = 0; i < image_width; ++i)
+        for (int i = 0; i < img.get_image_width(); ++i)
         {
-            Vector3 colors(double(i) / (image_width - 1), double(j) / (image_height - 1), 0.25);
+            auto u = double(i) / (img.get_image_width() - 1);
+            auto v = double(j) / (img.get_image_height() - 1);
+            Ray r(img.get_origin(), img.lower_left_corner() + u * img.get_horizontal() + v * img.get_vertical() - img.get_origin());
+            Vector3 pixel_color = ray_color(r);
 
-            iw.write(colors.r(), colors.g(), colors.b());
+            iw.write(pixel_color.r(), pixel_color.g(), pixel_color.b());
         }
     }
     return 0;

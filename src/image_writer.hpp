@@ -5,10 +5,13 @@
 #include <fstream>
 #include <string>
 
+#include "image.hpp"
+
 class ImageWriter
 {
 public:
     ImageWriter(const int imageWidth, const int imageHeight, const std::string filename = "image.ppm");
+    ImageWriter(const Image &image, const std::string filename = "image.ppm");
     ~ImageWriter();
 
     ImageWriter &operator<<(const std::string str);
