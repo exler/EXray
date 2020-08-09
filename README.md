@@ -1,5 +1,8 @@
-# EXray
-3D raytracer
+<p align="center">
+    <img src="docs/logo.png" width="324">
+    <p align="center">🎥 Simple, dependency-free 3D raytracing engine written in C++</P>
+</p>
+
 
 ## Installation
 
