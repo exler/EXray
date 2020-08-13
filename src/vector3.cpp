@@ -29,7 +29,11 @@ Vector3 &Vector3::operator/=(const double t)
 
 double Vector3::length() const
 {
-    return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+    return sqrt(length_squared());
+}
+double Vector3::length_squared() const
+{
+    return x * x + y * y + z * z;
 }
 
 float Vector3::r()
