@@ -1,19 +1,35 @@
-#ifndef ENTITY_H
-#define ENTITY_H
+#include "entity.hpp"
 
-#include "ray.hpp"
-
-struct HitRecord
+EntityList::EntityList() {}
+EntityList::EntityList(std::shared_ptr<Entity> object)
 {
-    Vector3 p;
-    Vector3 normal;
-    float t;
-};
+    add(object);
+}
 
-class Entity
+void EntityList::clear()
 {
-public:
-    virtual bool hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const = 0;
-};
+    _objects.clear();
+}
+void EntityList::add(std::shared_ptr<Entity> object)
+{
+    _objects.push_back(object);
+}
 
-#endif
+bool EntityList::hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const
+{
+    HitRecord temp_rec;
+    bool hit = false;
+    auto closest = t_max;
+
+    for (const auto &object : _objects)
+    {
+        if (object->hit(r, t_min, closest, temp_rec))
+        {
+            hit = true;
+            closest = temp_rec.t;
+            rec = temp_rec;
+        }
+    }
+
+    return hit;
+}

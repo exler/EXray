@@ -14,7 +14,7 @@ public:
     Vector3();
     Vector3(float e0, float e1, float e2);
 
-    inline Vector3 operator-() const;
+    Vector3 operator-() const;
     Vector3 &operator+=(const Vector3 &v);
     Vector3 &operator*=(const double t);
     Vector3 &operator/=(const double t);

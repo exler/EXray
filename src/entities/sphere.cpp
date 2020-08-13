@@ -1,7 +1,7 @@
 #include "sphere.hpp"
 
 Sphere::Sphere() {}
-Sphere::Sphere(Vector3 c, float r) : _center(c), _radius(r){};
+Sphere::Sphere(Vector3 c, float r) : _center(c), _radius(r) {}
 
 bool Sphere::hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const
 {
@@ -20,7 +20,8 @@ bool Sphere::hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const
         {
             rec.t = tmp;
             rec.p = r.at(rec.t);
-            rec.normal = (rec.p - _center) / _radius;
+            Vector3 outward_normal = (rec.p - _center) / _radius;
+            rec.set_face_normal(r, outward_normal);
             return true;
         }
 
@@ -29,7 +30,8 @@ bool Sphere::hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const
         {
             rec.t = tmp;
             rec.p = r.at(rec.t);
-            rec.normal = (rec.p - _center) / _radius;
+            Vector3 outward_normal = (rec.p - _center) / _radius;
+            rec.set_face_normal(r, outward_normal);
             return true;
         }
     }

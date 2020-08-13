@@ -1,6 +1,7 @@
 #ifndef RAY_H
 #define RAY_H
 
+#include "utility.hpp"
 #include "vector3.hpp"
 
 class Ray
@@ -13,8 +14,6 @@ public:
     Vector3 direction() const;
 
     Vector3 at(double t) const;
-
-    Vector3 lerp(const Vector3 &start_color, const Vector3 &end_color) const;
 
 private:
     Vector3 _orig;

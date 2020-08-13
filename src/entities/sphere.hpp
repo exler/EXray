@@ -3,8 +3,9 @@
 
 #include <cmath>
 
-#include "entity.hpp"
-#include "vector3.hpp"
+#include "../entity.hpp"
+#include "../vector3.hpp"
+#include "../ray.hpp"
 
 class Sphere : public Entity
 {
