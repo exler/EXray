@@ -5,13 +5,12 @@
 #include <fstream>
 #include <string>
 
-#include "image.hpp"
+#include "scene.hpp"
 
 class ImageWriter
 {
 public:
-    ImageWriter(const int imageWidth, const int imageHeight, const std::string filename = "image.ppm");
-    ImageWriter(const Image &image, const std::string filename = "image.ppm");
+    ImageWriter(const int image_width, const int image_height, const std::string filename);
     ~ImageWriter();
 
     ImageWriter &operator<<(const std::string str);
@@ -21,7 +20,7 @@ public:
     ImageWriter &write(const int r, const int g, const int b);
 
 private:
-    std::ofstream _imageStream;
+    std::ofstream _image_stream;
 };
 
 #endif

@@ -1,6 +1,5 @@
 #include "ray.hpp"
 
-Ray::Ray() {}
 Ray::Ray(const Vector3 &origin, const Vector3 &direction)
     : _orig(origin), _dir(direction) {}
 

@@ -11,6 +11,10 @@ public:
     float y;
     float z;
 
+    float r();
+    float g();
+    float b();
+
     Vector3();
     Vector3(float e0, float e1, float e2);
 
@@ -21,15 +25,13 @@ public:
 
     double length() const;
     double length_squared() const;
-
-    float r();
-    float g();
-    float b();
 };
+
+using Color3 = Vector3;
 
 inline std::ostream &operator<<(std::ostream &out, const Vector3 &v)
 {
-    return out << v.x << ' ' << v.y << ' ' << v.z;
+    return out << '(' << v.x << ", " << v.y << ", " << v.z << ')';
 }
 inline Vector3 operator+(const Vector3 &u, const Vector3 &v)
 {

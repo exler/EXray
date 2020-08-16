@@ -3,6 +3,19 @@
 Vector3::Vector3() : x(0), y(0), z(0) {}
 Vector3::Vector3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
 
+float Vector3::r()
+{
+    return x;
+}
+float Vector3::g()
+{
+    return y;
+}
+float Vector3::b()
+{
+    return z;
+}
+
 Vector3 Vector3::operator-() const
 {
     return Vector3(-x, -y, -z);
@@ -34,20 +47,4 @@ double Vector3::length() const
 double Vector3::length_squared() const
 {
     return x * x + y * y + z * z;
-}
-
-float Vector3::r()
-{
-    // Translate X from [0..1] to [0..255] for RGB
-    return static_cast<int>(round(255 * x));
-}
-float Vector3::g()
-{
-    // Translate Y from [0..1] to [0..255] for RGB
-    return static_cast<int>(round(255 * y));
-}
-float Vector3::b()
-{
-    // Translate Z from [0..1] to [0..255] for RGB
-    return static_cast<int>(round(255 * z));
 }

@@ -23,6 +23,11 @@ struct HitRecord
 class Entity
 {
 public:
+    Vector3 hi(const Ray &r)
+    {
+        return r.direction();
+    }
+
     virtual bool hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const = 0;
 };
 
@@ -34,6 +39,11 @@ public:
 
     void clear();
     void add(std::shared_ptr<Entity> object);
+
+    std::vector<std::shared_ptr<Entity>> obj()
+    {
+        return _objects;
+    }
 
     virtual bool hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const override;
 

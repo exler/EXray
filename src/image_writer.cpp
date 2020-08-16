@@ -1,49 +1,40 @@
 #include "image_writer.hpp"
 
-ImageWriter::ImageWriter(const int imageWidth, const int imageHeight, const std::string filename)
+ImageWriter::ImageWriter(const int image_width, const int image_height, const std::string filename)
 {
-    _imageStream.open(filename, std::ios_base::trunc);
+    _image_stream.open(filename, std::ios_base::trunc);
 
     // "P3" means this is a RGB color image in ASCII
     // "255" is the maximum value for each color
-    _imageStream << "P3\n";
-    _imageStream << imageWidth << " " << imageHeight << "\n255\n";
-}
-ImageWriter::ImageWriter(const Image &image, const std::string filename)
-{
-    _imageStream.open(filename, std::ios_base::trunc);
-
-    // "P3" means this is a RGB color image in ASCII
-    // "255" is the maximum value for each color
-    _imageStream << "P3\n";
-    _imageStream << image.get_image_width() << " " << image.get_image_height() << "\n255\n";
+    _image_stream << "P3\n";
+    _image_stream << image_width << " " << image_height << "\n255\n";
 }
 
 ImageWriter &ImageWriter::operator<<(const std::string str)
 {
-    _imageStream << str;
+    _image_stream << str;
     return *this;
 }
 
 ImageWriter &ImageWriter::operator<<(const char chr)
 {
-    _imageStream << chr;
+    _image_stream << chr;
     return *this;
 }
 
 ImageWriter &ImageWriter::operator<<(const int val)
 {
-    _imageStream << val;
+    _image_stream << val;
     return *this;
 }
 
 ImageWriter &ImageWriter::write(const int r, const int g, const int b)
 {
-    _imageStream << r << ' ' << g << ' ' << b << std::endl;
+    _image_stream << r << ' ' << g << ' ' << b << std::endl;
     return *this;
 }
 
 ImageWriter::~ImageWriter()
 {
-    _imageStream.close();
+    _image_stream.close();
 }
