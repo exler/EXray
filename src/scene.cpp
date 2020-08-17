@@ -59,6 +59,7 @@ void Scene::render()
     // Render
     for (int j = _image_height - 1; j >= 0; --j)
     {
+        std::cout << "[EXRay] Scanlines remaining: " << j << std::endl;
         for (int i = 0; i < _image_width; ++i)
         {
             Color3 pixel_color(0, 0, 0);
@@ -78,9 +79,9 @@ void Scene::save(const std::string filename)
 {
     ImageWriter iw(_image_width, _image_height, filename);
 
-    for (unsigned int i = 0; i < _image.size(); i++)
+    for (Vector3 pixel : _image)
     {
-        iw.write(_image[i].r(), _image[i].g(), _image[i].b());
+        iw.write(pixel.r(), pixel.g(), pixel.b());
     }
 
     std::cout << "[EXRay] Image saved to: " << filename << std::endl;
