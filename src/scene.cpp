@@ -1,4 +1,4 @@
-#include "scene.hpp"
+#include "Scene.hpp"
 
 Scene::Scene(float aspect_ratio, int image_width) : _image_width(image_width)
 {

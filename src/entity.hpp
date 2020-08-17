@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-#include "ray.hpp"
+#include "Ray.hpp"
 
 struct HitRecord
 {

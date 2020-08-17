@@ -1,8 +1,8 @@
 #ifndef RAY_H
 #define RAY_H
 
-#include "utility.hpp"
-#include "vector3.hpp"
+#include "Utility.hpp"
+#include "Vector3.hpp"
 
 class Ray
 {

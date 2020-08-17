@@ -5,13 +5,13 @@
 #include <algorithm>
 #include <iostream>
 
-#include "utility.hpp"
-#include "camera.hpp"
-#include "ray.hpp"
-#include "vector3.hpp"
-#include "entity.hpp"
-#include "image_writer.hpp"
-#include "entities/sphere.hpp"
+#include "Utility.hpp"
+#include "Camera.hpp"
+#include "Ray.hpp"
+#include "Vector3.hpp"
+#include "Entity.hpp"
+#include "ImageWriter.hpp"
+#include "entities/Sphere.hpp"
 
 class Scene
 {

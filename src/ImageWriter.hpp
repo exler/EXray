@@ -5,7 +5,7 @@
 #include <fstream>
 #include <string>
 
-#include "scene.hpp"
+#include "Scene.hpp"
 
 class ImageWriter
 {

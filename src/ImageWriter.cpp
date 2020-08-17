@@ -1,4 +1,4 @@
-#include "image_writer.hpp"
+#include "ImageWriter.hpp"
 
 ImageWriter::ImageWriter(const int image_width, const int image_height, const std::string filename)
 {

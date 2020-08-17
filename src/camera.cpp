@@ -1,4 +1,4 @@
-#include "camera.hpp"
+#include "Camera.hpp"
 
 Camera::Camera(float aspect_ratio)
 {

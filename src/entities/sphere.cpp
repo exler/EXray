@@ -1,4 +1,4 @@
-#include "sphere.hpp"
+#include "Sphere.hpp"
 
 Sphere::Sphere() {}
 Sphere::Sphere(Vector3 c, float r) : _center(c), _radius(r) {}

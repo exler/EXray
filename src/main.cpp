@@ -1,9 +1,9 @@
-#include "utility.hpp"
-#include "camera.hpp"
-#include "scene.hpp"
+#include "Utility.hpp"
+#include "Camera.hpp"
+#include "Scene.hpp"
 
-#include "entity.hpp"
-#include "entities/sphere.hpp"
+#include "Entity.hpp"
+#include "entities/Sphere.hpp"
 
 int main()
 {
