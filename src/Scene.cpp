@@ -53,9 +53,9 @@ Color3 Scene::transform_color(Vector3 &color) const
     auto b = color.b();
 
     auto scale = 1.0 / _samples_per_pixel;
-    r *= scale;
-    g *= scale;
-    b *= scale;
+    r = sqrt(scale * r);
+    g = sqrt(scale * b);
+    b = sqrt(scale * b);
 
     return Color3(
         static_cast<int>(256 * std::clamp(r, 0.0f, 0.999f)),
