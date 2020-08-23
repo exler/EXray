@@ -18,14 +18,14 @@ inline float random_float()
 {
     // Returns a random real number in [0, 1)
     std::uniform_real_distribution<float> distribution(0.0, 1.0);
-    std::mt19937 gen;
+    static std::mt19937 gen;
     return distribution(gen);
 }
 inline float random_float(float min, float max)
 {
     // Returns a random real number in [min, max)
     std::uniform_real_distribution<float> distribution(min, max);
-    std::mt19937 gen;
+    static std::mt19937 gen;
     return distribution(gen);
 }
 
