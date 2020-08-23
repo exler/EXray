@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <chrono>
 
 #include "Utility.hpp"
 #include "Camera.hpp"
@@ -22,19 +23,21 @@ public:
     void set_camera(Camera *camera);
     void set_world(EntityList *world);
     void set_samples_per_pixel(const int samples_per_pixel);
+    void set_max_depth(const int max_depth);
 
     void render();
 
     void save(const std::string filename = "image.ppm");
 
 private:
-    Vector3 lerp(const Ray &ray, const Vector3 &start_color, const Vector3 &end_color) const;
+    Vector3 lerp(const Ray &ray, const Vector3 &start, const Vector3 &end, int depth) const;
     Color3 transform_color(Vector3 &color) const;
 
     int _image_width;
     int _image_height;
 
     int _samples_per_pixel = 100;
+    int _max_depth = 50;
 
     Camera *_camera;
     EntityList *_world;

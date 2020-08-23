@@ -20,13 +20,22 @@ void Scene::set_samples_per_pixel(const int samples_per_pixel)
 {
     _samples_per_pixel = samples_per_pixel;
 }
+void Scene::set_max_depth(const int max_depth)
+{
+    _max_depth = max_depth;
+}
 
-Vector3 Scene::lerp(const Ray &ray, const Vector3 &start, const Vector3 &end) const
+Vector3 Scene::lerp(const Ray &ray, const Vector3 &start, const Vector3 &end, int depth) const
 {
     HitRecord rec;
+
+    if (depth <= 0)
+        return Color3(0, 0, 0);
+
     if (_world->hit(ray, 0, infinity, rec))
     {
-        return 0.5 * (rec.normal + start);
+        Vector3 target = rec.p + rec.normal + Vector3::random_in_unit_sphere();
+        return 0.5 * lerp(Ray(rec.p, target - rec.p), start, end, depth - 1);
     }
 
     Vector3 unit_direction = unit_vector(ray.direction());
@@ -56,10 +65,10 @@ Color3 Scene::transform_color(Vector3 &color) const
 
 void Scene::render()
 {
-    // Render
+    auto t1 = std::chrono::high_resolution_clock::now();
     for (int j = _image_height - 1; j >= 0; --j)
     {
-        std::cout << "[EXRay] Scanlines remaining: " << j << std::endl;
+        std::cout << "Scanlines remaining: " << j << std::endl;
         for (int i = 0; i < _image_width; ++i)
         {
             Color3 pixel_color(0, 0, 0);
@@ -68,11 +77,15 @@ void Scene::render()
                 auto u = (i + random_float()) / (_image_width - 1);
                 auto v = (j + random_float()) / (_image_height - 1);
                 Ray r = _camera->get_ray(u, v);
-                pixel_color += lerp(r, Vector3(1.0, 1.0, 1.0), Vector3(0.5, 0.7, 1.0));
+                pixel_color += lerp(r, Vector3(1.0, 1.0, 1.0), Vector3(0.5, 0.7, 1.0), _max_depth);
             }
             _image.push_back(transform_color(pixel_color));
         }
     }
+    auto t2 = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count();
+
+    std::cout << "Finished rendering in " << duration << "s." << std::endl;
 }
 
 void Scene::save(const std::string filename)
@@ -84,5 +97,5 @@ void Scene::save(const std::string filename)
         iw.write(pixel.r(), pixel.g(), pixel.b());
     }
 
-    std::cout << "[EXRay] Image saved to: " << filename << std::endl;
+    std::cout << "Image saved to: " << filename << std::endl;
 }

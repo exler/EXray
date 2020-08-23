@@ -4,6 +4,8 @@
 #include <cmath>
 #include <iostream>
 
+#include "Utility.hpp"
+
 class Vector3
 {
 public:
@@ -25,6 +27,10 @@ public:
 
     double length() const;
     double length_squared() const;
+
+    static Vector3 random();
+    static Vector3 random(float min, float max);
+    static Vector3 random_in_unit_sphere();
 };
 
 using Color3 = Vector3;
