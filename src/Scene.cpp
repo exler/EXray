@@ -32,7 +32,7 @@ Vector3 Scene::lerp(const Ray &ray, const Vector3 &start, const Vector3 &end, in
     if (depth <= 0)
         return Color3(0, 0, 0);
 
-    if (_world->hit(ray, 0, infinity, rec))
+    if (_world->hit(ray, 0.001, infinity, rec))
     {
         Vector3 target = rec.p + rec.normal + Vector3::random_in_unit_sphere();
         return 0.5 * lerp(Ray(rec.p, target - rec.p), start, end, depth - 1);
