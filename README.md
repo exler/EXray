@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="docs/logo.png" width="324">
+    <img src="docs/logo_transparent.png" width="324">
     <p align="center">🎥 Simple, dependency-free 3D raytracing engine written in C++</P>
 </p>
 
