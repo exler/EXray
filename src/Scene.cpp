@@ -34,7 +34,7 @@ Vector3 Scene::lerp(const Ray &ray, const Vector3 &start, const Vector3 &end, in
 
     if (_world->hit(ray, 0.001, infinity, rec))
     {
-        Vector3 target = rec.p + rec.normal + Vector3::random_in_unit_sphere();
+        Vector3 target = rec.p + rec.normal + Vector3::random_unit_vector();
         return 0.5 * lerp(Ray(rec.p, target - rec.p), start, end, depth - 1);
     }
 
