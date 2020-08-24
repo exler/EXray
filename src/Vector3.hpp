@@ -29,6 +29,8 @@ public:
     double length_squared() const;
 
     static Vector3 random_unit_vector();
+
+    static Vector3 reflect(const Vector3 &v, const Vector3 &n);
 };
 
 using Color3 = Vector3;

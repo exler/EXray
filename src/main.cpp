@@ -2,8 +2,10 @@
 #include "Camera.hpp"
 #include "Scene.hpp"
 
-#include "Entity.hpp"
+#include "EntityList.hpp"
 #include "entities/Sphere.hpp"
+#include "materials/Diffuse.hpp"
+#include "materials/Metal.hpp"
 
 int main()
 {
@@ -16,8 +18,16 @@ int main()
 
     // World
     EntityList world;
-    world.add(std::make_shared<Sphere>(Vector3(0, 0, -1), 0.5));
-    world.add(std::make_shared<Sphere>(Vector3(0, -100.5, -1), 100));
+
+    auto material_ground = std::make_shared<Diffuse>(Color3(0.8, 0.8, 0.0));
+    auto material_center = std::make_shared<Diffuse>(Color3(0.7, 0.3, 0.3));
+    auto material_left = std::make_shared<Metal>(Color3(0.8, 0.8, 0.8));
+    auto material_right = std::make_shared<Metal>(Color3(0.8, 0.6, 0.2));
+
+    world.add(std::make_shared<Sphere>(Vector3(0.0, -100.5, -1.0), 100.0, material_ground));
+    world.add(std::make_shared<Sphere>(Vector3(0.0, 0.0, -1.0), 0.5, material_center));
+    world.add(std::make_shared<Sphere>(Vector3(-1.0, 0.0, -1.0), 0.5, material_left));
+    world.add(std::make_shared<Sphere>(Vector3(1.0, 0.0, -1.0), 0.5, material_right));
 
     // Scene (image)
     Scene scene(aspect_ratio, image_width);

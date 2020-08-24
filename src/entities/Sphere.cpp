@@ -1,7 +1,9 @@
 #include "Sphere.hpp"
 
 Sphere::Sphere() {}
-Sphere::Sphere(Vector3 c, float r) : _center(c), _radius(r) {}
+Sphere::Sphere(Vector3 c, float r, std::shared_ptr<Material> m) : _center(c),
+                                                                  _radius(r),
+                                                                  _material(m) {}
 
 bool Sphere::hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const
 {
@@ -22,6 +24,7 @@ bool Sphere::hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const
             rec.p = r.at(rec.t);
             Vector3 outward_normal = (rec.p - _center) / _radius;
             rec.set_face_normal(r, outward_normal);
+            rec.mat = _material;
             return true;
         }
 
@@ -32,6 +35,7 @@ bool Sphere::hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const
             rec.p = r.at(rec.t);
             Vector3 outward_normal = (rec.p - _center) / _radius;
             rec.set_face_normal(r, outward_normal);
+            rec.mat = _material;
             return true;
         }
     }

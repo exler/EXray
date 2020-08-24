@@ -34,8 +34,11 @@ Vector3 Scene::lerp(const Ray &ray, const Vector3 &start, const Vector3 &end, in
 
     if (_world->hit(ray, 0.001, infinity, rec))
     {
-        Vector3 target = rec.p + rec.normal + Vector3::random_unit_vector();
-        return 0.5 * lerp(Ray(rec.p, target - rec.p), start, end, depth - 1);
+        Ray scattered;
+        Color3 attenuation;
+        if (rec.mat->scatter(ray, rec, attenuation, scattered))
+            return attenuation * lerp(scattered, start, end, depth - 1);
+        return Color3(0, 0, 0);
     }
 
     Vector3 unit_direction = unit_vector(ray.direction());

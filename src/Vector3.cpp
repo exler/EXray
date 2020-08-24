@@ -57,3 +57,10 @@ Vector3 Vector3::random_unit_vector()
     float r = sqrt(1 - z * z);
     return Vector3(r * cos(a), r * sin(a), z);
 }
+
+Vector3 Vector3::reflect(const Vector3 &v, const Vector3 &n)
+{
+    // Returns reflectec ray direction v + 2b,
+    // n is a unit vector, length of b is v dot n
+    return v - 2 * dot(v, n) * n;
+}

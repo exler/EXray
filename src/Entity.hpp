@@ -2,14 +2,16 @@
 #define ENTITY_H
 
 #include <memory>
-#include <vector>
 
 #include "Ray.hpp"
+
+class Material;
 
 struct HitRecord
 {
     Vector3 p;
     Vector3 normal;
+    std::shared_ptr<Material> mat;
     float t;
     bool front_face;
 
@@ -23,32 +25,7 @@ struct HitRecord
 class Entity
 {
 public:
-    Vector3 hi(const Ray &r)
-    {
-        return r.direction();
-    }
-
     virtual bool hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const = 0;
-};
-
-class EntityList : public Entity
-{
-public:
-    EntityList();
-    EntityList(std::shared_ptr<Entity> object);
-
-    void clear();
-    void add(std::shared_ptr<Entity> object);
-
-    std::vector<std::shared_ptr<Entity>> obj()
-    {
-        return _objects;
-    }
-
-    virtual bool hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const override;
-
-private:
-    std::vector<std::shared_ptr<Entity>> _objects;
 };
 
 #endif

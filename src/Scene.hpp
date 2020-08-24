@@ -10,8 +10,9 @@
 #include "Camera.hpp"
 #include "Ray.hpp"
 #include "Vector3.hpp"
-#include "Entity.hpp"
 #include "ImageWriter.hpp"
+#include "Material.hpp"
+#include "EntityList.hpp"
 #include "entities/Sphere.hpp"
 
 class Scene
