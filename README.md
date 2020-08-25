@@ -1,6 +1,11 @@
 <p align="center">
     <img src="docs/logo_transparent.png" width="324">
     <p align="center">🎥 Simple, dependency-free 3D raytracing engine written in C++</P>
+    <p align="center">
+        <img src="https://travis-ci.org/EXLER/EXray.svg?branch=master">
+        <img src="https://img.shields.io/github/license/EXLER/EXRay">
+        <img src="https://img.shields.io/github/repo-size/EXLER/EXRay">
+    </p>
 </p>
 
 
