@@ -61,9 +61,9 @@ Color3 Scene::transform_color(Vector3 &color) const
     b = sqrt(scale * b);
 
     return Color3(
-        static_cast<int>(256 * std::clamp(r, 0.0f, 0.999f)),
-        static_cast<int>(256 * std::clamp(g, 0.0f, 0.999f)),
-        static_cast<int>(256 * std::clamp(b, 0.0f, 0.999f)));
+        static_cast<int>(256 * clamp(r, 0.0f, 0.999f)),
+        static_cast<int>(256 * clamp(g, 0.0f, 0.999f)),
+        static_cast<int>(256 * clamp(b, 0.0f, 0.999f)));
 }
 
 void Scene::render()
