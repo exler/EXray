@@ -15,7 +15,7 @@ int main()
     int image_width = 400;
 
     // Camera
-    Camera cam(aspect_ratio);
+    Camera cam(aspect_ratio, 20, Vector3(-2, 2, 1), Vector3(0, 0, -1), Vector3(0, 1, 0));
 
     // World
     EntityList world;
@@ -28,6 +28,7 @@ int main()
     world.add(std::make_shared<Sphere>(Vector3(0.0, -100.5, -1.0), 100.0, material_ground));
     world.add(std::make_shared<Sphere>(Vector3(0.0, 0.0, -1.0), 0.5, material_center));
     world.add(std::make_shared<Sphere>(Vector3(-1.0, 0.0, -1.0), 0.5, material_left));
+    world.add(std::make_shared<Sphere>(Vector3(-1.0, 0.0, -1.0), -0.45, material_left));
     world.add(std::make_shared<Sphere>(Vector3(1.0, 0.0, -1.0), 0.5, material_right));
 
     // Scene (image)
