@@ -28,6 +28,8 @@ public:
     float length() const;
     float length_squared() const;
 
+    static Vector3 random();
+    static Vector3 random(float min, float max);
     static Vector3 random_unit_vector();
     static Vector3 random_in_unit_disk();
 

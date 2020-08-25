@@ -49,6 +49,14 @@ float Vector3::length_squared() const
     return x * x + y * y + z * z;
 }
 
+Vector3 Vector3::random()
+{
+    return Vector3(random_float(), random_float(), random_float());
+}
+Vector3 Vector3::random(float min, float max)
+{
+    return Vector3(random_float(min, max), random_float(min, max), random_float(min, max));
+}
 Vector3 Vector3::random_unit_vector()
 {
     // Returns a random unit vector using Lambertian reflectance
