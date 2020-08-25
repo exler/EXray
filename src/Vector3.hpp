@@ -29,6 +29,7 @@ public:
     float length_squared() const;
 
     static Vector3 random_unit_vector();
+    static Vector3 random_in_unit_disk();
 
     static Vector3 reflect(const Vector3 &v, const Vector3 &n);
     static Vector3 refract(const Vector3 &uv, const Vector3 &n, float refractive_div);

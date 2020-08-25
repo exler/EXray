@@ -57,6 +57,17 @@ Vector3 Vector3::random_unit_vector()
     float r = sqrt(1 - z * z);
     return Vector3(r * cos(a), r * sin(a), z);
 }
+Vector3 Vector3::random_in_unit_disk()
+{
+    // Returns a random point inside unit disk
+    while (true)
+    {
+        auto p = Vector3(random_float(-1, 1), random_float(-1, 1), 0);
+        if (p.length_squared() >= 1)
+            continue;
+        return p;
+    }
+}
 
 Vector3 Vector3::reflect(const Vector3 &v, const Vector3 &n)
 {
