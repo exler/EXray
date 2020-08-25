@@ -13,7 +13,7 @@ Vector3 Ray::direction() const
     return _dir;
 }
 
-Vector3 Ray::at(double t) const
+Vector3 Ray::at(float t) const
 {
     return _orig + t * _dir;
 }

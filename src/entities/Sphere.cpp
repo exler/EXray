@@ -5,7 +5,7 @@ Sphere::Sphere(Vector3 c, float r, std::shared_ptr<Material> m) : _center(c),
                                                                   _radius(r),
                                                                   _material(m) {}
 
-bool Sphere::hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const
+bool Sphere::hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const
 {
     Vector3 oc = r.origin() - _center;
     auto a = r.direction().length_squared();

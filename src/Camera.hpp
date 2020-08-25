@@ -9,7 +9,7 @@ class Camera
 public:
     Camera(float aspect_ratio);
 
-    Ray get_ray(double u, double v) const;
+    Ray get_ray(float u, float v) const;
 
 private:
     Vector3 _origin;

@@ -6,11 +6,11 @@
 #include <limits>
 
 // Constants
-constexpr double infinity = std::numeric_limits<double>::infinity();
-constexpr double pi = 3.14159265358979323846;
+constexpr float infinity = std::numeric_limits<float>::infinity();
+constexpr float pi = 3.14159265358979323846;
 
 // Functions
-inline float degrees_to_radians(double degrees)
+inline float degrees_to_radians(float degrees)
 {
     return degrees * pi / 180;
 }

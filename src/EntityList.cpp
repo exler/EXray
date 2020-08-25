@@ -15,7 +15,7 @@ void EntityList::add(std::shared_ptr<Entity> object)
     _objects.push_back(object);
 }
 
-bool EntityList::hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const
+bool EntityList::hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const
 {
     HitRecord temp_rec;
     bool hit = false;

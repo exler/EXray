@@ -22,15 +22,16 @@ public:
 
     Vector3 operator-() const;
     Vector3 &operator+=(const Vector3 &v);
-    Vector3 &operator*=(const double t);
-    Vector3 &operator/=(const double t);
+    Vector3 &operator*=(const float t);
+    Vector3 &operator/=(const float t);
 
-    double length() const;
-    double length_squared() const;
+    float length() const;
+    float length_squared() const;
 
     static Vector3 random_unit_vector();
 
     static Vector3 reflect(const Vector3 &v, const Vector3 &n);
+    static Vector3 refract(const Vector3 &uv, const Vector3 &n, float refractive_div);
 };
 
 using Color3 = Vector3;
@@ -51,20 +52,20 @@ inline Vector3 operator*(const Vector3 &u, const Vector3 &v)
 {
     return Vector3(u.x * v.x, u.y * v.y, u.z * v.z);
 }
-inline Vector3 operator*(double t, const Vector3 &v)
+inline Vector3 operator*(float t, const Vector3 &v)
 {
     return Vector3(t * v.x, t * v.y, t * v.z);
 }
-inline Vector3 operator*(const Vector3 &v, double t)
+inline Vector3 operator*(const Vector3 &v, float t)
 {
     return t * v;
 }
-inline Vector3 operator/(const Vector3 &v, double t)
+inline Vector3 operator/(const Vector3 &v, float t)
 {
     return (1 / t) * v;
 }
 
-inline double dot(const Vector3 &u, const Vector3 &v)
+inline float dot(const Vector3 &u, const Vector3 &v)
 {
     return (u.x * v.x) + (u.y * v.y) + (u.z * v.z);
 }

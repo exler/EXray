@@ -13,7 +13,7 @@ public:
     Vector3 origin() const;
     Vector3 direction() const;
 
-    Vector3 at(double t) const;
+    Vector3 at(float t) const;
 
 private:
     Vector3 _orig;

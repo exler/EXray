@@ -12,7 +12,7 @@ Camera::Camera(float aspect_ratio)
     _lower_left_corner = _origin - _horizontal / 2 - _vertical / 2 - Vector3(0, 0, _focal_length);
 }
 
-Ray Camera::get_ray(double u, double v) const
+Ray Camera::get_ray(float u, float v) const
 {
     return Ray(
         _origin,

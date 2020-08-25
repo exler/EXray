@@ -28,23 +28,23 @@ Vector3 &Vector3::operator+=(const Vector3 &v)
     z += v.z;
     return *this;
 }
-Vector3 &Vector3::operator*=(const double t)
+Vector3 &Vector3::operator*=(const float t)
 {
     x *= t;
     y *= t;
     z *= t;
     return *this;
 }
-Vector3 &Vector3::operator/=(const double t)
+Vector3 &Vector3::operator/=(const float t)
 {
     return *this *= 1 / t;
 }
 
-double Vector3::length() const
+float Vector3::length() const
 {
     return sqrt(length_squared());
 }
-double Vector3::length_squared() const
+float Vector3::length_squared() const
 {
     return x * x + y * y + z * z;
 }
@@ -60,7 +60,15 @@ Vector3 Vector3::random_unit_vector()
 
 Vector3 Vector3::reflect(const Vector3 &v, const Vector3 &n)
 {
-    // Returns reflectec ray direction v + 2b,
+    // Returns reflected ray direction v + 2b,
     // n is a unit vector, length of b is v dot n
     return v - 2 * dot(v, n) * n;
+}
+Vector3 Vector3::refract(const Vector3 &uv, const Vector3 &n, float refractive_div)
+{
+    // Returns refracted ray direction using Snell's law
+    auto cos_theta = dot(-uv, n);
+    Vector3 r_out_perp = refractive_div * (uv + cos_theta * n);
+    Vector3 r_out_parallel = -sqrt(fabs(1.0 - r_out_perp.length_squared())) * n;
+    return r_out_perp + r_out_parallel;
 }
