@@ -19,8 +19,8 @@ Camera::Camera(float aspect_ratio,
     _v = cross(w, _u);
 
     _origin = lookfrom;
-    _horizontal = focus_dist * viewport_width * u;
-    _vertical = focus_dist * viewport_height * v;
+    _horizontal = focus_dist * viewport_width * _u;
+    _vertical = focus_dist * viewport_height * _v;
     _lower_left_corner = _origin - _horizontal / 2 - _vertical / 2 - focus_dist * w;
     _lens_radius = aperture / 2;
 }
