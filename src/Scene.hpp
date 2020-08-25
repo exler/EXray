@@ -2,7 +2,6 @@
 #define SCENE_H
 
 #include <vector>
-#include <algorithm>
 #include <iostream>
 #include <chrono>
 
