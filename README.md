@@ -1,6 +1,6 @@
 <p align="center">
     <img src="docs/logo_transparent.png" width="324">
-    <p align="center">🎥 Simple, dependency-free 3D raytracing engine written in C++</P>
+    <p align="center">🎥 Simple, scriptable and extensible 3D raytracing engine written in C++17</P>
     <p align="center">
         <img src="https://travis-ci.org/EXLER/EXray.svg?branch=master">
         <img src="https://img.shields.io/github/license/EXLER/EXRay">
@@ -14,7 +14,11 @@
 ### Building from source
 
 ```bash
-$ mkdir build/ && cd build/
+# Recursively clone the repository to get all submodules
+$ git clone --recurse-submodules https://github.com/EXLER/EXray
+
+# Create build directory and build project
+$ mkdir EXray/build/ && cd EXRAY/build/
 $ cmake .. && make
 ```
 
