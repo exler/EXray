@@ -6,7 +6,9 @@ Camera::Camera(float aspect_ratio,
                Vector3 lookat,
                Vector3 vup,
                float aperture,
-               float focus_dist)
+               float focus_dist,
+               float t0,
+               float t1)
 {
     auto theta = degrees_to_radians(vertical_fov);
     auto h = tan(theta / 2);
@@ -23,14 +25,18 @@ Camera::Camera(float aspect_ratio,
     _vertical = focus_dist * viewport_height * _v;
     _lower_left_corner = _origin - _horizontal / 2 - _vertical / 2 - focus_dist * w;
     _lens_radius = aperture / 2;
+
+    _time0 = t0;
+    _time1 = t1;
 }
 
 Ray Camera::get_ray(float s, float t) const
 {
     Vector3 rd = _lens_radius * Vector3::random_in_unit_disk();
-    Vector3 offset = _u * rd.x + _v * rd.y;
+    Vector3 offset = _u * rd.x() + _v * rd.y();
 
     return Ray(
         _origin + offset,
-        _lower_left_corner + s * _horizontal + t * _vertical - _origin - offset);
+        _lower_left_corner + s * _horizontal + t * _vertical - _origin - offset,
+        random_float(_time0, _time1));
 }

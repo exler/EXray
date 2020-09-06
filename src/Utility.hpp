@@ -28,6 +28,10 @@ inline float random_float(float min, float max)
     static std::mt19937 gen;
     return distribution(gen);
 }
+inline int random_int(int min, int max)
+{
+    return static_cast<int>(random_float(min, max));
+}
 inline float clamp(float x, float min, float max)
 {
     if (x < min)

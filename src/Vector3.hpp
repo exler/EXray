@@ -9,13 +9,13 @@
 class Vector3
 {
 public:
-    float x;
-    float y;
-    float z;
+    float x() const { return e[0]; }
+    float y() const { return e[1]; }
+    float z() const { return e[2]; }
 
-    float r();
-    float g();
-    float b();
+    float r() const { return e[0]; }
+    float g() const { return e[1]; }
+    float b() const { return e[2]; }
 
     Vector3();
     Vector3(float e0, float e1, float e2);
@@ -24,6 +24,8 @@ public:
     Vector3 &operator+=(const Vector3 &v);
     Vector3 &operator*=(const float t);
     Vector3 &operator/=(const float t);
+    float operator[](int i) const;
+    float &operator[](int i);
 
     float length() const;
     float length_squared() const;
@@ -35,29 +37,32 @@ public:
 
     static Vector3 reflect(const Vector3 &v, const Vector3 &n);
     static Vector3 refract(const Vector3 &uv, const Vector3 &n, float refractive_div);
+
+private:
+    float e[3];
 };
 
 using Color3 = Vector3;
 
 inline std::ostream &operator<<(std::ostream &out, const Vector3 &v)
 {
-    return out << '(' << v.x << ", " << v.y << ", " << v.z << ')';
+    return out << '(' << v.x() << ", " << v.y() << ", " << v.z() << ')';
 }
 inline Vector3 operator+(const Vector3 &u, const Vector3 &v)
 {
-    return Vector3(u.x + v.x, u.y + v.y, u.z + v.z);
+    return Vector3(u.x() + v.x(), u.y() + v.y(), u.z() + v.z());
 }
 inline Vector3 operator-(const Vector3 &u, const Vector3 &v)
 {
-    return Vector3(u.x - v.x, u.y - v.y, u.z - v.z);
+    return Vector3(u.x() - v.x(), u.y() - v.y(), u.z() - v.z());
 }
 inline Vector3 operator*(const Vector3 &u, const Vector3 &v)
 {
-    return Vector3(u.x * v.x, u.y * v.y, u.z * v.z);
+    return Vector3(u.x() * v.x(), u.y() * v.y(), u.z() * v.z());
 }
 inline Vector3 operator*(float t, const Vector3 &v)
 {
-    return Vector3(t * v.x, t * v.y, t * v.z);
+    return Vector3(t * v.x(), t * v.y(), t * v.z());
 }
 inline Vector3 operator*(const Vector3 &v, float t)
 {
@@ -70,13 +75,13 @@ inline Vector3 operator/(const Vector3 &v, float t)
 
 inline float dot(const Vector3 &u, const Vector3 &v)
 {
-    return (u.x * v.x) + (u.y * v.y) + (u.z * v.z);
+    return (u.x() * v.x()) + (u.y() * v.y()) + (u.z() * v.z());
 }
 inline Vector3 cross(const Vector3 &u, const Vector3 &v)
 {
-    return Vector3(u.y * v.z - u.z * v.y,
-                   u.z * v.x - u.x * v.z,
-                   u.x * v.y - u.y * v.x);
+    return Vector3(u.y() * v.z() - u.z() * v.y(),
+                   u.z() * v.x() - u.x() * v.z(),
+                   u.x() * v.y() - u.y() * v.x());
 }
 inline Vector3 unit_vector(const Vector3 &v)
 {

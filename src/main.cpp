@@ -3,17 +3,19 @@
 #include "Scene.hpp"
 
 #include "EntityList.hpp"
+#include "entities/MovingSphere.hpp"
 #include "entities/Sphere.hpp"
 #include "materials/Dielectric.hpp"
 #include "materials/Diffuse.hpp"
 #include "materials/Metal.hpp"
+#include "textures/Checker.hpp"
 
 EntityList random_scene()
 {
     EntityList world;
 
-    auto ground_material = std::make_shared<Diffuse>(Color3(0.5, 0.5, 0.5));
-    world.add(std::make_shared<Sphere>(Color3(0, -1000, 0), 1000, ground_material));
+    auto checker = std::make_shared<Checker>(Color3(0.2, 0.3, 0.1), Color3(0.9, 0.9, 0.9));
+    world.add(std::make_shared<Sphere>(Color3(0, -1000, 0), 1000, std::make_shared<Diffuse>(checker)));
 
     for (int a = -11; a < 11; a++)
     {
@@ -31,7 +33,8 @@ EntityList random_scene()
                     // diffuse
                     auto albedo = Color3::random() * Color3::random();
                     sphere_material = std::make_shared<Diffuse>(albedo);
-                    world.add(std::make_shared<Sphere>(center, 0.2, sphere_material));
+                    auto center2 = center + Vector3(0, random_float(0, 0.5), 0);
+                    world.add(std::make_shared<MovingSphere>(center, center2, 0.0, 1.0, 0.2, sphere_material));
                 }
                 else if (choose_mat < 0.95)
                 {
@@ -66,16 +69,16 @@ EntityList random_scene()
 int main()
 {
     // Details
-    float aspect_ratio = 3.0 / 2.0;
-    int image_width = 420;
+    float aspect_ratio = 16.0 / 9.0;
+    int image_width = 400;
     Vector3 lookfrom(13, 2, 3);
     Vector3 lookat(0, 0, 0);
     Vector3 vup(0, 1, 0);
-    auto dist_to_focus = (lookfrom - lookat).length();
+    auto dist_to_focus = 10;
     auto aperture = 0.1;
 
     // Camera
-    Camera cam(aspect_ratio, 20, lookfrom, lookat, vup, aperture, dist_to_focus);
+    Camera cam(aspect_ratio, 20, lookfrom, lookat, vup, aperture, dist_to_focus, 0.0, 1.0);
 
     // World
     EntityList world = random_scene();

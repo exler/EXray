@@ -16,7 +16,9 @@ public:
            Vector3 lookat,
            Vector3 vup,
            float aperture,
-           float focus_dist);
+           float focus_dist,
+           float t0 = 0,
+           float t1 = 0);
 
     Ray get_ray(float u, float v) const;
 
@@ -27,6 +29,7 @@ private:
     Vector3 _lower_left_corner;
     Vector3 _u, _v;
     float _lens_radius;
+    float _time0, _time1;
 };
 
 #endif

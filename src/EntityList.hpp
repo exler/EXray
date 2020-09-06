@@ -6,6 +6,7 @@
 
 #include "Entity.hpp"
 #include "Ray.hpp"
+#include "AABB.hpp"
 
 class EntityList : public Entity
 {
@@ -22,6 +23,7 @@ public:
     }
 
     virtual bool hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const override;
+    virtual bool bounding_box(float t0, float t1, AABB &output_box) const override;
 
 private:
     std::vector<std::shared_ptr<Entity>> _objects;

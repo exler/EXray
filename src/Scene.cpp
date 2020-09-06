@@ -42,7 +42,7 @@ Vector3 Scene::lerp(const Ray &ray, const Vector3 &start, const Vector3 &end, in
     }
 
     Vector3 unit_direction = unit_vector(ray.direction());
-    auto t = 0.5 * (unit_direction.y + 1.0);
+    auto t = 0.5 * (unit_direction.y() + 1.0);
 
     // Linear blend (lerp)
     // blendedValue = (1 - t) * startValue + t * endValue

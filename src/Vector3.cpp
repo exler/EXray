@@ -1,43 +1,38 @@
 #include "Vector3.hpp"
 
-Vector3::Vector3() : x(0), y(0), z(0) {}
-Vector3::Vector3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
-
-float Vector3::r()
-{
-    return x;
-}
-float Vector3::g()
-{
-    return y;
-}
-float Vector3::b()
-{
-    return z;
-}
+Vector3::Vector3() : e{0, 0, 0} {}
+Vector3::Vector3(float _x, float _y, float _z) : e{_x, _y, _z} {}
 
 Vector3 Vector3::operator-() const
 {
-    return Vector3(-x, -y, -z);
+    return Vector3(-e[0], -e[1], -e[2]);
 }
 
 Vector3 &Vector3::operator+=(const Vector3 &v)
 {
-    x += v.x;
-    y += v.y;
-    z += v.z;
+    e[0] += v.e[0];
+    e[1] += v.e[1];
+    e[2] += v.e[2];
     return *this;
 }
 Vector3 &Vector3::operator*=(const float t)
 {
-    x *= t;
-    y *= t;
-    z *= t;
+    e[0] *= t;
+    e[1] *= t;
+    e[2] *= t;
     return *this;
 }
 Vector3 &Vector3::operator/=(const float t)
 {
     return *this *= 1 / t;
+}
+float Vector3::operator[](int i) const
+{
+    return e[i];
+}
+float &Vector3::operator[](int i)
+{
+    return e[i];
 }
 
 float Vector3::length() const
@@ -46,7 +41,7 @@ float Vector3::length() const
 }
 float Vector3::length_squared() const
 {
-    return x * x + y * y + z * z;
+    return e[0] * e[0] + e[1] * e[1] + e[2] * e[2];
 }
 
 Vector3 Vector3::random()
