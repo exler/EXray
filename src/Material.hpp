@@ -10,6 +10,10 @@ class Material
 {
 public:
     virtual bool scatter(const Ray &r_in, const HitRecord &rec, Color3 &attenuation, Ray &scattered) const = 0;
+    virtual Color3 emitted(double u, double v, const Vector3 &p) const
+    {
+        return Color3(0, 0, 0);
+    }
 
     static float schlick(float cos, float ref_idx)
     {

@@ -25,7 +25,7 @@ void Scene::set_max_depth(const int max_depth)
     _max_depth = max_depth;
 }
 
-Vector3 Scene::lerp(const Ray &ray, const Vector3 &start, const Vector3 &end, int depth) const
+Vector3 Scene::ray_color(const Ray &ray, const Color3 &background, int depth) const
 {
     HitRecord rec;
 
@@ -33,20 +33,16 @@ Vector3 Scene::lerp(const Ray &ray, const Vector3 &start, const Vector3 &end, in
         return Color3(0, 0, 0);
 
     if (_world->hit(ray, 0.001, infinity, rec))
-    {
-        Ray scattered;
-        Color3 attenuation;
-        if (rec.mat->scatter(ray, rec, attenuation, scattered))
-            return attenuation * lerp(scattered, start, end, depth - 1);
-        return Color3(0, 0, 0);
-    }
+        return background;
 
-    Vector3 unit_direction = unit_vector(ray.direction());
-    auto t = 0.5 * (unit_direction.y() + 1.0);
+    Ray scattered;
+    Color3 attenuation;
+    Color3 emitted = rec.mat->emitted(rec.u, rec.v, rec.p);
 
-    // Linear blend (lerp)
-    // blendedValue = (1 - t) * startValue + t * endValue
-    return (1.0 - t) * start + t * end;
+    if (!rec.mat->scatter(ray, rec, attenuation, scattered))
+        return emitted;
+
+    return emitted + attenuation * ray_color(scattered, background, depth - 1);
 }
 
 Color3 Scene::transform_color(Vector3 &color) const
@@ -80,7 +76,7 @@ void Scene::render()
                 auto u = (i + random_float()) / (_image_width - 1);
                 auto v = (j + random_float()) / (_image_height - 1);
                 Ray r = _camera->get_ray(u, v);
-                pixel_color += lerp(r, Vector3(1.0, 1.0, 1.0), Vector3(0.5, 0.7, 1.0), _max_depth);
+                pixel_color += ray_color(r, Vector3(1.0, 1.0, 1.0), Vector3(0.5, 0.7, 1.0), _max_depth);
             }
             _image.push_back(transform_color(pixel_color));
         }

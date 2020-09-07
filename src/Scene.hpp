@@ -30,7 +30,7 @@ public:
     void save(const std::string filename = "image.ppm");
 
 private:
-    Vector3 lerp(const Ray &ray, const Vector3 &start, const Vector3 &end, int depth) const;
+    Vector3 ray_color(const Ray &ray, const Color3 &background, int depth) const;
     Color3 transform_color(Vector3 &color) const;
 
     int _image_width;
