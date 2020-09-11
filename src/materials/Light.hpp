@@ -14,7 +14,7 @@ public:
     Light(Color3 c);
 
     virtual bool scatter(const Ray &r_in, const HitRecord &rec, Color3 &attenuation, Ray &scattered) const override;
-    virtual Color3 emitted(double u, double v, const Vector3 &p) const;
+    virtual Color3 emitted(float u, float v, const Vector3 &p) const;
 
 private:
     std::shared_ptr<Texture> _emit;

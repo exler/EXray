@@ -24,13 +24,14 @@ public:
     void set_world(EntityList *world);
     void set_samples_per_pixel(const int samples_per_pixel);
     void set_max_depth(const int max_depth);
+    void set_background(const Color3 &background);
 
     void render();
 
     void save(const std::string filename = "image.ppm");
 
 private:
-    Vector3 ray_color(const Ray &ray, const Color3 &background, int depth) const;
+    Vector3 ray_color(const Ray &ray, int depth) const;
     Color3 transform_color(Vector3 &color) const;
 
     int _image_width;
@@ -41,6 +42,8 @@ private:
 
     Camera *_camera;
     EntityList *_world;
+
+    Color3 _background;
 
     std::vector<Color3> _image;
 };

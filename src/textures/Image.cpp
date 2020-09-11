@@ -1,5 +1,8 @@
 #include "Image.hpp"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "../../lib/stb/stb_image.h"
+
 Image::Image() : _data(nullptr),
                  _width(0),
                  _height(0),

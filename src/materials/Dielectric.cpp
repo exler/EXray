@@ -11,15 +11,7 @@ bool Dielectric::scatter(const Ray &r_in, const HitRecord &rec, Color3 &attenuat
 
     float cos_theta = fmin(dot(-unit_direction, rec.normal), 1.0);
     float sin_theta = sqrt(1.0 - cos_theta * cos_theta);
-    if (refractive_div * sin_theta > 1.0)
-    {
-        Vector3 reflected = Vector3::reflect(unit_direction, rec.normal);
-        scattered = Ray(rec.p, reflected, r_in.time());
-        return true;
-    }
-
-    float reflect_prob = schlick(cos_theta, refractive_div);
-    if (random_float() < reflect_prob)
+    if ((refractive_div * sin_theta > 1.0) || (random_float() < schlick(cos_theta, refractive_div)))
     {
         Vector3 reflected = Vector3::reflect(unit_direction, rec.normal);
         scattered = Ray(rec.p, reflected, r_in.time());

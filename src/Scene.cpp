@@ -24,16 +24,20 @@ void Scene::set_max_depth(const int max_depth)
 {
     _max_depth = max_depth;
 }
+void Scene::set_background(const Color3 &background)
+{
+    _background = background;
+}
 
-Vector3 Scene::ray_color(const Ray &ray, const Color3 &background, int depth) const
+Vector3 Scene::ray_color(const Ray &ray, int depth) const
 {
     HitRecord rec;
 
     if (depth <= 0)
         return Color3(0, 0, 0);
 
-    if (_world->hit(ray, 0.001, infinity, rec))
-        return background;
+    if (!_world->hit(ray, 0.001, infinity, rec))
+        return _background;
 
     Ray scattered;
     Color3 attenuation;
@@ -42,7 +46,7 @@ Vector3 Scene::ray_color(const Ray &ray, const Color3 &background, int depth) co
     if (!rec.mat->scatter(ray, rec, attenuation, scattered))
         return emitted;
 
-    return emitted + attenuation * ray_color(scattered, background, depth - 1);
+    return emitted + attenuation * ray_color(scattered, depth - 1);
 }
 
 Color3 Scene::transform_color(Vector3 &color) const
@@ -76,7 +80,7 @@ void Scene::render()
                 auto u = (i + random_float()) / (_image_width - 1);
                 auto v = (j + random_float()) / (_image_height - 1);
                 Ray r = _camera->get_ray(u, v);
-                pixel_color += ray_color(r, Vector3(1.0, 1.0, 1.0), Vector3(0.5, 0.7, 1.0), _max_depth);
+                pixel_color += ray_color(r, _max_depth);
             }
             _image.push_back(transform_color(pixel_color));
         }
