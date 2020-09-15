@@ -71,6 +71,7 @@ int main()
     scene.set_world(&world);
     scene.set_samples_per_pixel(200);
     scene.set_background(background);
+    scene.set_thread_count(4);
 
     scene.render();
     scene.save();

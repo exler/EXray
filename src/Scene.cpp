@@ -3,10 +3,18 @@
 Scene::Scene(float aspect_ratio, int image_width) : _image_width(image_width)
 {
     _image_height = static_cast<int>(image_width / aspect_ratio);
+    _image = new Color3[_image_width * _image_height];
 }
 
 Scene::Scene(int image_width, int image_height) : _image_width(image_width),
-                                                  _image_height(image_height) {}
+                                                  _image_height(image_height)
+{
+    _image = new Color3[_image_width * _image_height];
+}
+Scene::~Scene()
+{
+    delete _image;
+}
 
 void Scene::set_camera(Camera *camera)
 {
@@ -27,6 +35,10 @@ void Scene::set_max_depth(const int max_depth)
 void Scene::set_background(const Color3 &background)
 {
     _background = background;
+}
+void Scene::set_thread_count(const int thread_count)
+{
+    _thread_count = thread_count;
 }
 
 Vector3 Scene::ray_color(const Ray &ray, int depth) const
@@ -66,24 +78,55 @@ Color3 Scene::transform_color(Vector3 &color) const
         static_cast<int>(256 * clamp(b, 0.0f, 0.999f)));
 }
 
-void Scene::render()
+Color3 Scene::render_pixel(int i, int j)
 {
-    auto t1 = std::chrono::high_resolution_clock::now();
-    for (int j = _image_height - 1; j >= 0; --j)
+    Color3 pixel(0, 0, 0);
+    for (int s = 0; s < _samples_per_pixel; s++)
     {
-        std::cout << "Scanlines remaining: " << j << std::endl;
+        auto u = (i + random_float()) / (_image_width);
+        auto v = (j + random_float()) / (_image_height);
+        Ray r = _camera->get_ray(u, v);
+        pixel += ray_color(r, _max_depth);
+    }
+
+    return pixel;
+}
+
+void Scene::render_tile(int tile_height, int tile_height_pos)
+{
+    for (int j = tile_height_pos; j < tile_height_pos + tile_height; ++j)
+    {
         for (int i = 0; i < _image_width; ++i)
         {
-            Color3 pixel_color(0, 0, 0);
-            for (int s = 0; s < _samples_per_pixel; ++s)
-            {
-                auto u = (i + random_float()) / (_image_width - 1);
-                auto v = (j + random_float()) / (_image_height - 1);
-                Ray r = _camera->get_ray(u, v);
-                pixel_color += ray_color(r, _max_depth);
-            }
-            _image.push_back(transform_color(pixel_color));
+            Color3 pixel_color = render_pixel(i, j);
+
+            int idx = j * _image_width + i;
+            _image[idx] = transform_color(pixel_color);
         }
+    }
+}
+
+void Scene::render()
+{
+    std::vector<std::thread> threads;
+    auto t1 = std::chrono::high_resolution_clock::now();
+
+    std::cout << "Running the renderer with thread count: " << _thread_count << std::endl;
+    int tile_height = _image_height / _thread_count;
+    for (int th = 0, sum = 0; th < _thread_count; ++th)
+    {
+        sum += tile_height;
+        int tile_height_pos = tile_height * th;
+        if (th == (_thread_count - 1) && sum != _image_height)
+            tile_height = _image_height - tile_height_pos;
+
+        threads.push_back(std::thread(&Scene::render_tile, this, tile_height, tile_height_pos));
+    }
+
+    for (auto &t : threads)
+    {
+        if (t.joinable())
+            t.join();
     }
     auto t2 = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::seconds>(t2 - t1).count();
@@ -93,11 +136,12 @@ void Scene::render()
 
 void Scene::save(const std::string filename)
 {
+    std::cout << "Writing image to file..." << std::endl;
     ImageWriter iw(_image_width, _image_height, filename);
 
-    for (Vector3 pixel : _image)
+    for (int i = _image_height * _image_width; i > 0; --i)
     {
-        iw.write(pixel.r(), pixel.g(), pixel.b());
+        iw.write(_image[i].r(), _image[i].g(), _image[i].b());
     }
 
     std::cout << "Image saved to: " << filename << std::endl;
