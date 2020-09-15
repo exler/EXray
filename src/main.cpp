@@ -15,7 +15,6 @@
 #include "materials/Light.hpp"
 #include "textures/Checker.hpp"
 #include "textures/Image.hpp"
-#include "textures/Noise.hpp"
 
 EntityList cornell_box()
 {
