@@ -9,8 +9,6 @@
 class Image : public Texture
 {
 public:
-    const static int bytes_per_pixel = 3;
-
     Image();
     Image(const char *filename);
     ~Image();
@@ -20,7 +18,6 @@ public:
 private:
     unsigned char *_data;
     int _width, _height;
-    int _bytes_per_scanline;
 };
 
 #endif

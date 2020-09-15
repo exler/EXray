@@ -24,6 +24,7 @@ EntityList cornell_box()
     auto white = std::make_shared<Diffuse>(Color3(.73, .73, .73));
     auto green = std::make_shared<Diffuse>(Color3(.12, .45, .15));
     auto light = std::make_shared<Light>(Color3(15, 15, 15));
+    auto image = std::make_shared<Diffuse>(std::make_shared<Image>("texture.jpg"));
 
     objects.add(std::make_shared<YZRect>(0, 555, 0, 555, 555, green));
     objects.add(std::make_shared<YZRect>(0, 555, 0, 555, 0, red));
@@ -32,7 +33,7 @@ EntityList cornell_box()
     objects.add(std::make_shared<XZRect>(0, 555, 0, 555, 555, white));
     objects.add(std::make_shared<XZRect>(0, 555, 0, 555, 555, white));
 
-    Entity::ptr box1 = std::make_shared<Box>(Vector3(0, 0, 0), Vector3(165, 330, 165), white);
+    Entity::ptr box1 = std::make_shared<Box>(Vector3(0, 0, 0), Vector3(165, 330, 165), image);
     box1 = std::make_shared<RotateY>(box1, 15);
     box1 = std::make_shared<Translate>(box1, Vector3(265, 0, 295));
     objects.add(box1);
