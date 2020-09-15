@@ -1,7 +1,7 @@
 #include "EntityList.hpp"
 
 EntityList::EntityList() {}
-EntityList::EntityList(std::shared_ptr<Entity> object)
+EntityList::EntityList(Entity::ptr object)
 {
     add(object);
 }
@@ -10,7 +10,7 @@ void EntityList::clear()
 {
     _objects.clear();
 }
-void EntityList::add(std::shared_ptr<Entity> object)
+void EntityList::add(Entity::ptr object)
 {
     _objects.push_back(object);
 }

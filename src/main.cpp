@@ -33,12 +33,12 @@ EntityList cornell_box()
     objects.add(std::make_shared<XZRect>(0, 555, 0, 555, 555, white));
     objects.add(std::make_shared<XZRect>(0, 555, 0, 555, 555, white));
 
-    std::shared_ptr<Entity> box1 = std::make_shared<Box>(Vector3(0, 0, 0), Vector3(165, 330, 165), white);
+    Entity::ptr box1 = std::make_shared<Box>(Vector3(0, 0, 0), Vector3(165, 330, 165), white);
     box1 = std::make_shared<RotateY>(box1, 15);
     box1 = std::make_shared<Translate>(box1, Vector3(265, 0, 295));
     objects.add(box1);
 
-    std::shared_ptr<Entity> box2 = std::make_shared<Box>(Vector3(0, 0, 0), Vector3(165, 165, 165), white);
+    Entity::ptr box2 = std::make_shared<Box>(Vector3(0, 0, 0), Vector3(165, 165, 165), white);
     box2 = std::make_shared<RotateY>(box2, -18);
     box2 = std::make_shared<Translate>(box2, Vector3(130, 0, 65));
     objects.add(box2);

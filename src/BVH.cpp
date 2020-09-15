@@ -1,9 +1,8 @@
 #include "BVH.hpp"
 
-inline bool box_compare(const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b, int axis)
+inline bool box_compare(const Entity::ptr a, const Entity::ptr b, int axis)
 {
-    AABB box_a;
-    AABB box_b;
+    AABB box_a, box_b;
 
     if (!a->bounding_box(0, 0, box_a) || !b->bounding_box(0, 0, box_b))
         std::cerr << "No bounding box in bBVHNode constructor.\n";
@@ -11,17 +10,17 @@ inline bool box_compare(const std::shared_ptr<Entity> a, const std::shared_ptr<E
     return box_a.min()[axis] < box_b.min()[axis];
 }
 
-bool box_x_compare(const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b)
+bool box_x_compare(const Entity::ptr a, const Entity::ptr b)
 {
     return box_compare(a, b, 0);
 }
 
-bool box_y_compare(const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b)
+bool box_y_compare(const Entity::ptr a, const Entity::ptr b)
 {
     return box_compare(a, b, 1);
 }
 
-bool box_z_compare(const std::shared_ptr<Entity> a, const std::shared_ptr<Entity> b)
+bool box_z_compare(const Entity::ptr a, const Entity::ptr b)
 {
     return box_compare(a, b, 2);
 }
@@ -30,7 +29,7 @@ BVHNode::BVHNode() {}
 BVHNode::BVHNode(EntityList &list, float t0, float t1) : BVHNode(
                                                              list.obj(), 0, list.obj().size(), t0, t1) {}
 BVHNode::BVHNode(
-    std::vector<std::shared_ptr<Entity>> objects,
+    std::vector<Entity::ptr> objects,
     size_t start, size_t end, float t0, float t1)
 {
     int axis = random_int(0, 2);

@@ -21,8 +21,8 @@ bool AABB::hit(const Ray &r, float tmin, float tmax) const
         auto t1 = (max()[a] - r.origin()[a]) * invD;
         if (invD < 0.0f)
             std::swap(t0, t1);
-        tmin = t0 > tmin ? t0 : tmin;
-        tmax = t1 < tmax ? t1 : tmax;
+        tmin = fmin(t0, tmin);
+        tmax = fmin(t1, tmax);
         if (tmax <= tmin)
             return false;
     }

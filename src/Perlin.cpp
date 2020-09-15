@@ -5,7 +5,7 @@ Perlin::Perlin()
     _ranvec = new Vector3[_point_count];
     for (int i = 0; i < _point_count; ++i)
     {
-        _ranvec[i] = unit_vector(Vector3::random(-1, 1));
+        _ranvec[i] = normalize(Vector3::random(-1, 1));
     }
 
     _perm_x = perlin_generate_perm();

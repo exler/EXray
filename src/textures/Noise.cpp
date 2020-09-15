@@ -1,7 +1,7 @@
 #include "Noise.hpp"
 
 Noise::Noise() {}
-Noise::Noise(float sc) : _scale(sc){};
+Noise::Noise(float sc) : _scale(sc) {}
 
 Color3 Noise::value(float u, float v, const Vector3 &p) const
 {

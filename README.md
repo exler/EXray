@@ -1,6 +1,6 @@
 <p align="center">
     <img src="docs/logo_transparent.png" width="324">
-    <p align="center">🎥 Simple, scriptable and extensible 3D raytracing engine written in C++17</P>
+    <p align="center">🎥 Simple, multithreaded, extensible 3D raytracing engine written in C++17</P>
     <p align="center">
         <img src="https://travis-ci.org/EXLER/EXray.svg?branch=master">
         <img src="https://img.shields.io/github/license/EXLER/EXRay">

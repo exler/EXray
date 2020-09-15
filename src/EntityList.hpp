@@ -12,12 +12,12 @@ class EntityList : public Entity
 {
 public:
     EntityList();
-    EntityList(std::shared_ptr<Entity> object);
+    EntityList(Entity::ptr object);
 
     void clear();
-    void add(std::shared_ptr<Entity> object);
+    void add(Entity::ptr object);
 
-    std::vector<std::shared_ptr<Entity>> obj()
+    std::vector<Entity::ptr> obj()
     {
         return _objects;
     }
@@ -26,7 +26,7 @@ public:
     virtual bool bounding_box(float t0, float t1, AABB &output_box) const override;
 
 private:
-    std::vector<std::shared_ptr<Entity>> _objects;
+    std::vector<Entity::ptr> _objects;
 };
 
 #endif

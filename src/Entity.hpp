@@ -28,6 +28,7 @@ struct HitRecord
 class Entity
 {
 public:
+    typedef std::shared_ptr<Entity> ptr;
     virtual bool hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const = 0;
     virtual bool bounding_box(float t0, float t1, AABB &output_box) const = 0;
 };

@@ -11,13 +11,12 @@ Camera::Camera(float aspect_ratio,
                float t1)
 {
     auto theta = degrees_to_radians(vertical_fov);
-    auto h = tan(theta / 2);
 
-    auto viewport_height = 2.0 * h;
+    auto viewport_height = 2.0 * tan(theta / 2);
     auto viewport_width = aspect_ratio * viewport_height;
 
-    auto w = unit_vector(lookfrom - lookat);
-    _u = unit_vector(cross(vup, w));
+    auto w = normalize(lookfrom - lookat);
+    _u = normalize(cross(vup, w));
     _v = cross(w, _u);
 
     _origin = lookfrom;
