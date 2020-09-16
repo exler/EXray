@@ -8,6 +8,12 @@
     </p>
 </p>
 
+## Preview
+
+<p align="center">
+    <img src="docs/header.png" width="628">
+</p>
+
 ## Dependencies
 
 * [stb_image.h](https://github.com/nothings/stb) - image loading
