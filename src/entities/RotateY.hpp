@@ -12,7 +12,7 @@
 class RotateY : public Entity
 {
 public:
-    RotateY(std::shared_ptr<Entity> p, float angle);
+    RotateY(Entity::ptr p, float angle);
 
     virtual bool hit(
         const Ray &r, float t_min, float t_max, HitRecord &rec) const override;
@@ -20,7 +20,7 @@ public:
     virtual bool bounding_box(float t0, float t1, AABB &output_box) const override;
 
 public:
-    std::shared_ptr<Entity> _ptr;
+    Entity::ptr _ptr;
     float _sin_theta;
     float _cos_theta;
     bool _hasbox;

@@ -5,22 +5,18 @@
 
 Image::Image() : _data(nullptr),
                  _width(0),
-                 _height(0),
-                 _bytes_per_scanline(0) {}
+                 _height(0) {}
 Image::Image(const char *filename)
 {
-    auto components_per_pixel = bytes_per_pixel;
-
+    int comp;
     _data = stbi_load(
-        filename, &_width, &_height, &components_per_pixel, components_per_pixel);
+        filename, &_width, &_height, &comp, 0);
 
     if (!_data)
     {
         std::cerr << "ERROR: Could not load texture image file '" << filename << "'." << std::endl;
         _width = _height = 0;
     }
-
-    _bytes_per_scanline = bytes_per_pixel * _width;
 }
 Image::~Image()
 {
@@ -29,25 +25,17 @@ Image::~Image()
 
 Color3 Image::value(float u, float v, const Vector3 &p) const
 {
-    // If we have no texture data, then return solid cyan as a debugging aid.
+    // If we have no texture data, return solid cyan
     if (_data == nullptr)
         return Color3(0, 1, 1);
 
-    // Clamp input texture coordinates to [0, 1] x [1, 0]
-    u = clamp(u, 0.0, 1.0);
-    v = 1.0 - clamp(v, 0.0, 1.0); // Flip V to image coordinates
+    int i = u * _width;
+    int j = (1 - v) * _height - 0.001;
 
-    auto i = static_cast<int>(u * _width);
-    auto j = static_cast<int>(v * _height);
+    i = clamp(i, 0, _width - 1);
+    j = clamp(j, 0, _height - 1);
 
-    // Clamp integer mapping, since actual coordinates should be less than 1.0
-    if (i >= _width)
-        i = _width - 1;
-    if (j >= _height)
-        j = _height - 1;
-
-    const auto color_scale = 1.0 / 255.0;
-    auto pixel = _data + j * _bytes_per_scanline + i * bytes_per_pixel;
-
-    return Color3(color_scale * pixel[0], color_scale * pixel[1], color_scale * pixel[2]);
+    return Vector3(static_cast<int>(_data[3 * i + 3 * _width * j + 0]) / 255.0f,
+                   static_cast<int>(_data[3 * i + 3 * _width * j + 1]) / 255.0f,
+                   static_cast<int>(_data[3 * i + 3 * _width * j + 2]) / 255.0f);
 }

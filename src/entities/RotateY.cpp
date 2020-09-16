@@ -1,6 +1,6 @@
 #include "RotateY.hpp"
 
-RotateY::RotateY(std::shared_ptr<Entity> p, float angle) : _ptr(p)
+RotateY::RotateY(Entity::ptr p, float angle) : _ptr(p)
 {
     auto radians = degrees_to_radians(angle);
     _sin_theta = sin(radians);

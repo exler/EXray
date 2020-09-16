@@ -17,7 +17,7 @@ public:
     BVHNode(EntityList &list, float t0, float t1);
 
     BVHNode(
-        std::vector<std::shared_ptr<Entity>> objects,
+        std::vector<Entity::ptr> objects,
         size_t start, size_t end, float t0, float t1);
 
     virtual bool hit(
@@ -26,8 +26,7 @@ public:
         float t0, float t1, AABB &output_box) const override;
 
 private:
-    std::shared_ptr<Entity> left;
-    std::shared_ptr<Entity> right;
+    Entity::ptr left, right;
     AABB box;
 };
 

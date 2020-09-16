@@ -1,7 +1,7 @@
 #include "Translate.hpp"
 
-Translate::Translate(std::shared_ptr<Entity> p, const Vector3 &offset) : _ptr(p),
-                                                                         _offset(offset) {}
+Translate::Translate(Entity::ptr p, const Vector3 &offset) : _ptr(p),
+                                                             _offset(offset) {}
 
 bool Translate::hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const
 {

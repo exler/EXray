@@ -83,7 +83,7 @@ inline Vector3 cross(const Vector3 &u, const Vector3 &v)
                    u.z() * v.x() - u.x() * v.z(),
                    u.x() * v.y() - u.y() * v.x());
 }
-inline Vector3 unit_vector(const Vector3 &v)
+inline Vector3 normalize(const Vector3 &v)
 {
     return v / v.length();
 }
