@@ -8,6 +8,9 @@
     </p>
 </p>
 
+## Dependencies
+
+* [stb_image.h](https://github.com/nothings/stb) - image loading
 
 ## Installation
 

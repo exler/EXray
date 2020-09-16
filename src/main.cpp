@@ -4,7 +4,6 @@
 
 #include "EntityList.hpp"
 #include "BVH.hpp"
-#include "entities/MovingSphere.hpp"
 #include "entities/Sphere.hpp"
 #include "entities/Box.hpp"
 #include "entities/Translate.hpp"
