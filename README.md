@@ -42,6 +42,10 @@ If you want to convert the output PPM file, use [ImageMagick](https://imagemagic
 $ magick image.ppm image.png
 ```
 
+## Credits
+
+Based on the [Ray Tracing in One Weekend](https://raytracing.github.io/) book series.
+
 ## License
 
 Copyright (c) 2020 by ***Kamil Marut***
