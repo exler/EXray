@@ -1,6 +1,6 @@
 <p align="center">
-    <img src="docs/logo_transparent.png" width="324">
-    <p align="center">🎥 Simple, multithreaded, extensible 3D raytracing engine written in C++17</P>
+    <img src="docs/logo_transparent.png" width="256">
+    <p align="center">🎥 Simple, multithreaded, extensible raytracing engine written in C++17</p>
     <p align="center">
         <img src="https://github.com/EXLER/EXray/workflows/Build/badge.svg">
         <img src="https://img.shields.io/github/license/EXLER/EXRay">
@@ -48,6 +48,6 @@ Based on the [Ray Tracing in One Weekend](https://raytracing.github.io/) book se
 
 ## License
 
-Copyright (c) 2020 by ***Kamil Marut***
+Copyright (c) 2020-2021 by ***Kamil Marut***
 
 `EXray` is under the terms of the [MIT License](https://www.tldrlegal.com/l/mit), following all clarifications stated in the [license file](LICENSE).
