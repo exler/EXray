@@ -7,24 +7,40 @@
 #include "Entity.hpp"
 #include "Ray.hpp"
 
-class EntityList
+class EntityList : public Entity
 {
 public:
-    EntityList();
-    EntityList(Entity::ptr object);
+    EntityList() {}
 
-    void clear();
-    void add(Entity::ptr object);
+    std::vector<Entity::ptr> objects;
 
-    std::vector<Entity::ptr> obj()
+    void clear()
     {
-        return _objects;
+        objects.clear();
+    }
+    void add(Entity::ptr object)
+    {
+        objects.push_back(object);
     }
 
-    bool check_objects_hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const;
+    virtual bool hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const override
+    {
+        HitRecord temp_rec;
+        bool hit = false;
+        auto closest = t_max;
 
-private:
-    std::vector<Entity::ptr> _objects;
+        for (const auto &object : objects)
+        {
+            if (object->hit(r, t_min, closest, temp_rec))
+            {
+                hit = true;
+                closest = temp_rec.t;
+                rec = temp_rec;
+            }
+        }
+
+        return hit;
+    }
 };
 
 #endif

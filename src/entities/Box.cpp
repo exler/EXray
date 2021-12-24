@@ -96,5 +96,5 @@ Box::Box(const Vector3 &p0, const Vector3 &p1, std::shared_ptr<Material> ptr)
 
 bool Box::hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const
 {
-    return _sides.check_objects_hit(r, t_min, t_max, rec);
+    return _sides.hit(r, t_min, t_max, rec);
 }

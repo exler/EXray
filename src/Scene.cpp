@@ -42,7 +42,7 @@ Vector3 Scene::ray_color(const Ray &ray, int depth) const
     if (depth <= 0)
         return Color3(0, 0, 0);
 
-    if (!_world->check_objects_hit(ray, 0.001, infinity, rec))
+    if (!_world->hit(ray, 0.001, infinity, rec))
         return _background;
 
     Ray scattered;

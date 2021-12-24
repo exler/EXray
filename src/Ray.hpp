@@ -7,14 +7,27 @@
 class Ray
 {
 public:
-    Ray();
-    Ray(const Vector3 &origin, const Vector3 &direction, float time = 0.0);
+    Ray() {}
+    Ray(const Vector3 &origin, const Vector3 &direction, float time)
+        : _orig(origin), _dir(direction), _time(time) {}
 
-    Vector3 origin() const;
-    Vector3 direction() const;
-    float time() const;
+    Vector3 origin() const
+    {
+        return _orig;
+    }
+    Vector3 direction() const
+    {
+        return _dir;
+    }
+    float time() const
+    {
+        return _time;
+    }
 
-    Vector3 at(float t) const;
+    Vector3 at(float t) const
+    {
+        return _orig + t * _dir;
+    }
 
 private:
     Vector3 _orig;
