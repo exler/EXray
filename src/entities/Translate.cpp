@@ -14,14 +14,3 @@ bool Translate::hit(const Ray &r, float t_min, float t_max, HitRecord &rec) cons
 
     return true;
 }
-bool Translate::bounding_box(float t0, float t1, AABB &output_box) const
-{
-    if (_ptr->bounding_box(t0, t1, output_box))
-        return false;
-
-    output_box = AABB(
-        output_box.min() + _offset,
-        output_box.max() + _offset);
-
-    return true;
-}

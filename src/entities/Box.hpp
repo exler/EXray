@@ -8,7 +8,6 @@
 #include "../Entity.hpp"
 #include "../EntityList.hpp"
 #include "../Material.hpp"
-#include "../AABB.hpp"
 
 class XYRect : public Entity
 {
@@ -18,7 +17,6 @@ public:
            std::shared_ptr<Material> mat);
 
     virtual bool hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const override;
-    virtual bool bounding_box(float t0, float t1, AABB &output_box) const override;
 
 private:
     std::shared_ptr<Material> _material;
@@ -33,7 +31,6 @@ public:
            std::shared_ptr<Material> mat);
 
     virtual bool hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const override;
-    virtual bool bounding_box(float t0, float t1, AABB &output_box) const override;
 
 private:
     std::shared_ptr<Material> _material;
@@ -48,7 +45,6 @@ public:
            std::shared_ptr<Material> mat);
 
     virtual bool hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const override;
-    virtual bool bounding_box(float t0, float t1, AABB &output_box) const override;
 
 private:
     std::shared_ptr<Material> _material;
@@ -62,7 +58,6 @@ public:
     Box(const Vector3 &p0, const Vector3 &p1, std::shared_ptr<Material> ptr);
 
     virtual bool hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const override;
-    virtual bool bounding_box(float t0, float t1, AABB &output_box) const override;
 
 private:
     Vector3 _box_min, _box_max;

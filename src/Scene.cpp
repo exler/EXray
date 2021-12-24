@@ -1,11 +1,5 @@
 #include "Scene.hpp"
 
-Scene::Scene(float aspect_ratio, int image_width) : _image_width(image_width)
-{
-    _image_height = static_cast<int>(image_width / aspect_ratio);
-    _image = new Color3[_image_width * _image_height];
-}
-
 Scene::Scene(int image_width, int image_height) : _image_width(image_width),
                                                   _image_height(image_height)
 {
@@ -48,7 +42,7 @@ Vector3 Scene::ray_color(const Ray &ray, int depth) const
     if (depth <= 0)
         return Color3(0, 0, 0);
 
-    if (!_world->hit(ray, 0.001, infinity, rec))
+    if (!_world->check_objects_hit(ray, 0.001, infinity, rec))
         return _background;
 
     Ray scattered;
@@ -73,9 +67,9 @@ Color3 Scene::transform_color(Vector3 &color) const
     b = sqrt(scale * b);
 
     return Color3(
-        static_cast<int>(256 * clamp(r, 0.0f, 0.999f)),
-        static_cast<int>(256 * clamp(g, 0.0f, 0.999f)),
-        static_cast<int>(256 * clamp(b, 0.0f, 0.999f)));
+        static_cast<int>(256 * std::clamp(r, 0.0f, 0.999f)),
+        static_cast<int>(256 * std::clamp(g, 0.0f, 0.999f)),
+        static_cast<int>(256 * std::clamp(b, 0.0f, 0.999f)));
 }
 
 Color3 Scene::render_pixel(int i, int j)

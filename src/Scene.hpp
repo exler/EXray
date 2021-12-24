@@ -5,6 +5,7 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <algorithm>
 
 #include "Utility.hpp"
 #include "Camera.hpp"
@@ -18,7 +19,6 @@
 class Scene
 {
 public:
-    Scene(float aspect_ratio, int image_width);
     Scene(int image_width, int image_height);
     ~Scene();
 

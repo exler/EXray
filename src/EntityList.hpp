@@ -6,9 +6,8 @@
 
 #include "Entity.hpp"
 #include "Ray.hpp"
-#include "AABB.hpp"
 
-class EntityList : public Entity
+class EntityList
 {
 public:
     EntityList();
@@ -22,8 +21,7 @@ public:
         return _objects;
     }
 
-    virtual bool hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const override;
-    virtual bool bounding_box(float t0, float t1, AABB &output_box) const override;
+    bool check_objects_hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const;
 
 private:
     std::vector<Entity::ptr> _objects;

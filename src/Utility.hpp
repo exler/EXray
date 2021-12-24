@@ -4,6 +4,7 @@
 #include <random>
 #include <cmath>
 #include <limits>
+#include <algorithm>
 
 // Constants
 constexpr float infinity = std::numeric_limits<float>::infinity();
@@ -31,14 +32,6 @@ inline float random_float(float min, float max)
 inline int random_int(int min, int max)
 {
     return static_cast<int>(random_float(min, max));
-}
-inline float clamp(float x, float min, float max)
-{
-    if (x < min)
-        return min;
-    if (x > max)
-        return max;
-    return x;
 }
 
 #endif

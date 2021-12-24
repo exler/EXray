@@ -2,9 +2,9 @@
 #define IMAGE_H
 
 #include <iostream>
+#include <algorithm>
 
 #include "../Texture.hpp"
-#include "../Utility.hpp"
 
 class Image : public Texture
 {

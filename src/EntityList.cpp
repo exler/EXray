@@ -15,7 +15,7 @@ void EntityList::add(Entity::ptr object)
     _objects.push_back(object);
 }
 
-bool EntityList::hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const
+bool EntityList::check_objects_hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const
 {
     HitRecord temp_rec;
     bool hit = false;
@@ -32,23 +32,4 @@ bool EntityList::hit(const Ray &r, float t_min, float t_max, HitRecord &rec) con
     }
 
     return hit;
-}
-
-bool EntityList::bounding_box(float t0, float t1, AABB &output_box) const
-{
-    if (_objects.empty())
-        return false;
-
-    AABB temp_box;
-    bool first_box = true;
-
-    for (const auto &object : _objects)
-    {
-        if (!object->bounding_box(t0, t1, temp_box))
-            return false;
-        output_box = first_box ? temp_box : AABB::surrounding_box(output_box, temp_box);
-        first_box = false;
-    }
-
-    return true;
 }

@@ -25,13 +25,6 @@ bool XYRect::hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const
     rec.p = r.at(t);
     return true;
 }
-bool XYRect::bounding_box(float t0, float t1, AABB &output_box) const
-{
-    // The bounding box must have non-zero width in each dimension, so pad the Z
-    // dimension a small amount.
-    output_box = AABB(Vector3(_x0, _y0, _k - 0.0001), Vector3(_x1, _y1, _k + 0.0001));
-    return true;
-}
 
 XZRect::XZRect() {}
 XZRect::XZRect(float x0, float x1, float z0, float z1, float k,
@@ -56,13 +49,6 @@ bool XZRect::hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const
     rec.set_face_normal(r, Vector3(0, 1, 0));
     rec.mat = _material;
     rec.p = r.at(t);
-    return true;
-}
-bool XZRect::bounding_box(float t0, float t1, AABB &output_box) const
-{
-    // The bounding box must have non-zero width in each dimension, so pad the Z
-    // dimension a small amount.
-    output_box = AABB(Vector3(_x0, _k - 0.0001, _z0), Vector3(_x1, _k + 0.0001, _z1));
     return true;
 }
 
@@ -91,13 +77,6 @@ bool YZRect::hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const
     rec.p = r.at(t);
     return true;
 }
-bool YZRect::bounding_box(float t0, float t1, AABB &output_box) const
-{
-    // The bounding box must have non-zero width in each dimension, so pad the Z
-    // dimension a small amount.
-    output_box = AABB(Vector3(_k - 0.0001, _y0, _z0), Vector3(_k + 0.0001, _y1, _z1));
-    return true;
-}
 
 Box::Box() {}
 Box::Box(const Vector3 &p0, const Vector3 &p1, std::shared_ptr<Material> ptr)
@@ -117,10 +96,5 @@ Box::Box(const Vector3 &p0, const Vector3 &p1, std::shared_ptr<Material> ptr)
 
 bool Box::hit(const Ray &r, float t_min, float t_max, HitRecord &rec) const
 {
-    return _sides.hit(r, t_min, t_max, rec);
-}
-bool Box::bounding_box(float t0, float t1, AABB &output_box) const
-{
-    output_box = AABB(_box_min, _box_max);
-    return true;
+    return _sides.check_objects_hit(r, t_min, t_max, rec);
 }
