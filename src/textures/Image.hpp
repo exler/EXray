@@ -13,7 +13,7 @@ public:
     Image(const char *filename);
     ~Image();
 
-    virtual Color3 value(float u, float v, const Vector3 &p) const override;
+    virtual Color3 value(float u, float v) const override;
 
 private:
     unsigned char *_data;

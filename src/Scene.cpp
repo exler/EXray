@@ -47,7 +47,7 @@ Vector3 Scene::ray_color(const Ray &ray, int depth) const
 
     Ray scattered;
     Color3 attenuation;
-    Color3 emitted = rec.mat->emitted(rec.u, rec.v, rec.p);
+    Color3 emitted = rec.mat->emitted(rec.u, rec.v);
 
     if (!rec.mat->scatter(ray, rec, attenuation, scattered))
         return emitted;

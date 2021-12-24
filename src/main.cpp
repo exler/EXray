@@ -10,7 +10,6 @@
 #include "materials/Diffuse.hpp"
 #include "materials/Metal.hpp"
 #include "materials/Light.hpp"
-#include "textures/Checker.hpp"
 #include "textures/Image.hpp"
 
 EntityList cornell_box()

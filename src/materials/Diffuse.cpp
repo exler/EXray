@@ -7,6 +7,6 @@ bool Diffuse::scatter(const Ray &r_in, const HitRecord &rec, Color3 &attenuation
 {
     Vector3 scatter_dir = rec.normal + Vector3::random_unit_vector();
     scattered = Ray(rec.p, scatter_dir, r_in.time());
-    attenuation = _albedo->value(rec.u, rec.v, rec.p);
+    attenuation = _albedo->value(rec.u, rec.v);
     return true;
 }

@@ -4,6 +4,7 @@
 #include "../Entity.hpp"
 #include "../Material.hpp"
 #include "../Texture.hpp"
+#include "../textures/SolidColor.hpp"
 
 class Diffuse : public Material
 {

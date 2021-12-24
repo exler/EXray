@@ -8,7 +8,7 @@ bool Light::scatter(const Ray &r_in, const HitRecord &rec, Color3 &attenuation, 
     return false;
 }
 
-Color3 Light::emitted(float u, float v, const Vector3 &p) const
+Color3 Light::emitted(float u, float v) const
 {
-    return _emit->value(u, v, p);
+    return _emit->value(u, v);
 }

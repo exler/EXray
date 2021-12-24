@@ -22,7 +22,7 @@ Image::~Image()
     delete _data;
 }
 
-Color3 Image::value(float u, float v, const Vector3 &p) const
+Color3 Image::value(float u, float v) const
 {
     // If we have no texture data, return solid cyan
     if (_data == nullptr)

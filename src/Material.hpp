@@ -10,7 +10,7 @@ class Material
 {
 public:
     virtual bool scatter(const Ray &r_in, const HitRecord &rec, Color3 &attenuation, Ray &scattered) const = 0;
-    virtual Color3 emitted(float u, float v, const Vector3 &p) const
+    virtual Color3 emitted(float u, float v) const
     {
         return Color3(0, 0, 0);
     }
